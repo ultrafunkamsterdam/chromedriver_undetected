@@ -10,10 +10,10 @@ import pathlib
 import platform
 import random
 import re
-import shutil
 import string
 import sys
 import time
+import typing
 from urllib.request import urlopen
 from urllib.request import urlretrieve
 import zipfile
@@ -47,6 +47,7 @@ class Patcher(object):
         force=False,
         version_main: int = 0,
         user_multi_procs=False,
+        data_path: typing.Optional[str] = None,
     ):
         """
         Args:
@@ -57,6 +58,8 @@ class Patcher(object):
             version_main: 0 = auto
                 specify main chrome version (rounded, ex: 82)
         """
+        if data_path:
+            self.data_path = data_path
         self.force = force
         self._custom_exe_path = False
         prefix = "undetected"
